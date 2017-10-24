@@ -286,7 +286,6 @@ class Home extends React.Component {
 
 const mapStateAsProps = (state, ownProps) => {
   const path = ownProps.location.pathname.split('/');
-  const myPath = path;
   const newPage = parseInt(ownProps.match.params.num,10);
   const catPage = parseInt(path[4]);
   const queryParam = ownProps.match.params.text;
@@ -302,7 +301,6 @@ const mapStateAsProps = (state, ownProps) => {
     newCatPage = isNaN(catPage) ? 1 : catPage;
   }
   return {
-    myPath,
     queryParam,
     querySortPage,
     newCatPage,
