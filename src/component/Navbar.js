@@ -20,15 +20,15 @@ class Navbar extends React.Component {
     }
 
     
-    
   render() {
     const { navItem } = this.state;
+    const activeCategory =  this.props.pagePath[2];
     return (
         <div className="navbar">
             <ul className="nav-list">
                
                 {navItem.map((item, i) => {
-                     return <li key={i} onClick={()=> this.navItemClick(item)}><NavLink activeClassName="active disabled" to={`/sortby/${item}`}>{item.split('-').join(' ')}</NavLink></li>
+                     return <li key={i} onClick={()=> this.navItemClick(item)} className={activeCategory === item && "active disabled"}><NavLink to={`/sortby/${item}/page/1`}>{item.split('-').join(' ')}</NavLink></li>
                 })}
             </ul>
         </div>
