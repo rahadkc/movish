@@ -218,7 +218,7 @@ class Home extends React.Component {
       borderRadius: 8,
       boxSizing: 'border-box'
     }
-    // const newPath = nextProps.location.pathname.split('/');
+    const pagePath = this.props.location.pathname.split('/');
     
     return (
         <div className="App">
@@ -238,7 +238,7 @@ class Home extends React.Component {
                 </div>
               </div>
             
-              <Navbar navItem={this.navItemClick}/>
+              <Navbar navItem={this.navItemClick}  pagePath={pagePath}/>
             </div>
 
             <div className="pagination">
