@@ -32,6 +32,7 @@ h5{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  position:relative;
 }
 .App-intro >.item{
   width:30%;
@@ -131,7 +132,7 @@ h5{
   object-fit: cover;
 }
 .poster-sm img{
-  height: 250px;
+  height: 180px;
 }
 .text{
   /*flex:4;*/
@@ -220,17 +221,20 @@ button{
 }
 .pagination div{
   display:inline-block;
-  padding:15px 20px;
   text-align:center; 
   transition: all .3s; 
-  /*background:#fff;*/
   cursor:pointer;
+  vertical-align: middle;
+}
+.pagination div a{
+  padding:17px 20px;
+  display:block;
 }
 .pagination div:not(.num):hover{
   background:#ddd;
 }
 .pagination .num{
-  padding:15px 10px;
+  padding:14px 10px;
   width:44px;
   text-align:center;
   color:darkred;
@@ -265,7 +269,7 @@ button{
 .nav-list li a{
   display:block;
   padding:15px 20px;
-  color:cadetblue;
+  color: cadetblue;
   text-transform: capitalize;
   text-decoration: none;
   transition:all .3s;
@@ -273,12 +277,45 @@ button{
 .nav-list li a:hover{
   background:#efefef;
 }
+/* .nav-list li.active a{
+  color:#fff;
+} */
 .nav-list li .active,
 .nav-list li .active:hover{
   background: cadetblue;
   color:#fff;
 }
-
+.nav-list li .active{
+  color:#fff;
+}
+.tmdbImg{
+  width:100px;
+}
+/* loading */
+.load-wrapp {
+  width: 140px;
+  height: 100px;
+  margin: 0 auto;
+  padding: 20px 20px 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+.line {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin:5px;
+  border-radius: 15px;
+  background-color: cadetblue;
+}
+@keyframes loading {
+  0% {transform: translate(0,0);}
+  50% {transform: translate(0,15px);}
+  100% {transform: translate(0,0);}
+}
+.loader .line:nth-last-child(1) {animation: loading .6s .1s linear infinite;}
+.loader .line:nth-last-child(2) {animation: loading .6s .2s linear infinite;}
+.loader .line:nth-last-child(3) {animation: loading .6s .3s linear infinite;}
 /*responsive*/
 @media only screen and (max-width:1200px){
   .App-intro{

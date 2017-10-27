@@ -12,13 +12,15 @@ export function fetchMovies(page){
         }else{
             url = 'https://api.themoviedb.org/3/discover/movie?with_genres=18&page='+defaultPage+'&primary_release_year='+currentYear+apiKey;
         }
-        axios.get(url)
-        .then((response) => {
-            dispatch({type: "FETCH_MOVIES_FULFILLED", fetched: true, payload: response.data.results})
-        })
-        .catch((err) => {
-            dispatch({type: "FETCH_MOVIES_REJECTED" , fetching: false, payload: err});
-        })
+        dispatch({type: "FETCH_MOVIES", fetching: true})
+        setTimeout(function(){ axios.get(url)
+            .then((response) => {
+                dispatch({type: "FETCH_MOVIES_FULFILLED", fetching: false, fetched: true, payload: response.data.results})
+            })
+            .catch((err) => {
+                dispatch({type: "FETCH_MOVIES_REJECTED" , fetching: false, payload: err});
+            }) }, 500)
+        
     }
 }
 
@@ -34,9 +36,10 @@ export function fetchTopRated(page){
         }else{
             topRatedUrl= 'https://api.themoviedb.org/3/discover/movie?with_genres=18&sort_by=vote_average.desc&vote_count.gte=10&page='+defaultPage+apiKey;
         }
+        dispatch({type: "FETCH_MOVIES", fetching: true})
         axios.get(topRatedUrl)
         .then((response) => {
-            dispatch({type: "FETCH_MOVIES_FULFILLED", fetched: true, payload: response.data.results})
+            dispatch({type: "FETCH_MOVIES_FULFILLED", fetched: true, fetching: false, payload: response.data.results})
         })
         .catch((err) => {
             dispatch({type: "FETCH_MOVIES_REJECTED" , fetching: false, payload: err});
@@ -55,9 +58,10 @@ export function fetchPopular(page){
         }else{
             PopularUrl = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&page='+defaultPage+apiKey;
         }
+        dispatch({type: "FETCH_MOVIES", fetching: true})
         axios.get(PopularUrl)
         .then((response) => {
-            dispatch({type: "FETCH_MOVIES_FULFILLED", fetched: true, payload: response.data.results})
+            dispatch({type: "FETCH_MOVIES_FULFILLED", fetched: true, fetching: false, payload: response.data.results})
         })
         .catch((err) => {
             dispatch({type: "FETCH_MOVIES_REJECTED" , fetching: false, payload: err});
@@ -76,9 +80,10 @@ export function fetchKidsPopular(page){
         }else{
             kidsPopularUrl = 'https://api.themoviedb.org/3/discover/movie?certification_country=US&certification.lte=G&sort_by=popularity.desc&page='+defaultPage+apiKey;
         }
+        dispatch({type: "FETCH_MOVIES", fetching: true})
         axios.get(kidsPopularUrl)
         .then((response) => {
-            dispatch({type: "FETCH_MOVIES_FULFILLED", fetched: true, payload: response.data.results})
+            dispatch({type: "FETCH_MOVIES_FULFILLED", fetched: true, fetching: false, payload: response.data.results})
         })
         .catch((err) => {
             dispatch({type: "FETCH_MOVIES_REJECTED" , fetching: false, payload: err});
@@ -90,10 +95,12 @@ export function fetchKidsPopular(page){
 export function singleMovie(id){
     return function(dispatch){
         const url = 'https://api.themoviedb.org/3/movie/'+ id +'?&api_key=cfe422613b250f702980a3bbf9e90716';
+
+        dispatch({type: "FETCH_MOVIES", fetching: true})
         axios.get(url)
         .then((response) => {
             console.log(response.data, "response.data")
-            dispatch({type: "FETCH_MOVIES_FULFILLED", fetched: true, payload: response.data})
+            dispatch({type: "FETCH_MOVIES_FULFILLED", fetched: true, fetching: false, payload: response.data})
         })
         .catch((err) => {
             dispatch({type: "FETCH_MOVIES_REJECTED" , fetching: false, payload: err});
@@ -113,9 +120,10 @@ export const searchMovies = (movies) =>{
 export function searchAllMovie(movie, page){
     return function(dispatch){
         const searchUrl = 'https://api.themoviedb.org/3/search/movie?query='+ movie +'&page='+ page + '&api_key=cfe422613b250f702980a3bbf9e90716';
+        dispatch({type: "FETCH_MOVIES", fetching: true})
         axios.get(searchUrl)
         .then((response) => {
-            dispatch({type: "SEARCH_ALL_MOVIE", fetched: true, payload: response.data})
+            dispatch({type: "SEARCH_ALL_MOVIE", fetched: true, fetching: false, payload: response.data})
         })
         .catch((err) => {
             dispatch({type: "FETCH_MOVIES_REJECTED" , fetching: false, payload: err});

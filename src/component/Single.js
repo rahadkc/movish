@@ -15,8 +15,10 @@ class Single extends React.Component {
     this.apiCall(this.props.currentItem)
   }
   componentWillReceiveProps(nextProps) {
-    nextProps.currentItem !== this.props.currentItem && this.apiCall(nextProps.currentItem); 
-    console.log(this.props.movies, "next Props", this.props.currentItem)
+    console.log(nextProps.currentItem, "next Props", this.props.currentItem)
+    if(!this.props.fetching){
+      nextProps.currentItem !== this.props.currentItem &&  this.apiCall(nextProps.currentItem); 
+    }
     this.setState({
       data: true
     })
@@ -38,12 +40,16 @@ class Single extends React.Component {
     }
     const movie = this.props.movies;
     const isMovie = Object.keys(movie).length === 0;
+    console.log(isMovie, " movie")
+    // if(!this.props.fetching){
+    //   return <div></div>
+    // }
     
     return (
         <div className="App">
             <div className="App-intro">
             <br/>
-            {!isMovie && this.state.data  && <Movie detail={this.state.detail} movie={movie} name={movie.original_title} showId={movie.id} key={movie.showId} year={movie.release_date} cast={movie.show_cast} summary={movie.overview} category={movie.genres} rating={movie.vote_average} director={movie.director} poster={movie.poster_path}   /> }
+            {!isMovie && this.state.data && !this.props.fetching && <Movie detail={this.state.detail} movie={movie} name={movie.original_title} showId={movie.id} key={movie.showId} year={movie.release_date} cast={movie.show_cast} summary={movie.overview} category={movie.genres} rating={movie.vote_average} director={movie.director} poster={movie.poster_path}   /> }
 
             {!this.props.notFound && isMovie && <h2 style={notFoundStyle}>Loading .....</h2>  }
             

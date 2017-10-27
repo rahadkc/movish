@@ -18,7 +18,7 @@ class Movie extends React.Component {
     return finalText+".";
     }
     else return textToLimit;
-}
+  }
   render() {
     const { detail, movie }  = this.props;
     const url = 'https://image.tmdb.org/t/p/w640';

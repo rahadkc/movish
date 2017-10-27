@@ -4,6 +4,7 @@ import {bindActionCreators} from "redux";
 import {Link, NavLink} from 'react-router-dom';
 import Movielist from './component/MovieList';
 import Navbar from './component/Navbar';
+import Footer from './component/Footer';
 import * as actions from "./actions/MovieAction";
 import './App.css';
 
@@ -29,11 +30,13 @@ class Home extends React.Component {
   }
 
   componentDidMount(){
-    this.apiCall(this.props.currentPage);
+    if(!this.props.queryParam && !this.props.querySortPage){
+      this.apiCall(this.props.currentPage);
+    }
 
     if(this.props.queryParam){
       const path = this.props.location.pathname.split('/');
-
+      console.log("query param exist");
       this.setState({
         totalSearch: true,
         movieList: false,
@@ -44,6 +47,7 @@ class Home extends React.Component {
 
     if(this.props.querySortPage){
       const path = this.props.location.pathname.split('/');
+      console.log("querySort Page exist");
       this.setState({
         totalSearch: false,
         movieList: false,
@@ -52,7 +56,8 @@ class Home extends React.Component {
       })
       const category = this.props.querySortPage;
       // const page = path ? parseInt(path[4],10) : 1;
-      this.navItemClick(category, this.state.searchPage)
+      console.log(this.state.searchPage, " state.searchPage")
+      this.navItemClick(category, this.props.newCatPage)
     }
 
   }
@@ -67,7 +72,9 @@ class Home extends React.Component {
       totalSearch: false,
       data: true
     });
-    nextProps.currentPage !== this.props.currentPage && this.apiCall(nextProps.currentPage); 
+    if(this.state.movieList){
+      nextProps.currentPage !== this.props.currentPage && this.apiCall(nextProps.currentPage); 
+    }
     
     
     if(this.props.queryParam){
@@ -91,8 +98,11 @@ class Home extends React.Component {
       // console.log(nextProps.querySortPage, " this.props.querySortPage", this.props.querySortPage);
     }
     // console.log(this.state.movieList, " movieList", this.state.totalSearch, " totalsearch", this.state.navSelect, " navselect")
-    nextProps.match.isExact !== this.props.match.isExact && this.apiCall(nextProps.currentPage); 
-
+    console.log(nextProps, " next props")
+    if(nextProps.match.path === '/'){
+      // console.log(this.props.match.path === '/' && nextProps.match.path === '/', " match path")
+      nextProps.match.path !== this.props.match.path && this.apiCall(nextProps.currentPage); 
+    }
   }
  
   apiCall = (page) => {
@@ -101,19 +111,19 @@ class Home extends React.Component {
 
   nextPage = () => {
     const nextPage = this.props.currentPage + 1;
-    // if(this.state.movieList){
-      // this.apiCall(nextPage);
-    // }
+    if(this.state.movieList){
+      this.apiCall(nextPage);
+    }
     console.log(nextPage, " next page")
 
     
-    // let queryText = this.state.searchAllText ? this.state.searchAllText : this.props.queryParam;
+    let queryText = this.state.searchAllText ? this.state.searchAllText : this.props.queryParam;
     if(this.props.queryParam){
       const nextSearchPage = this.state.searchPage + 1;
       this.setState({
         searchPage: nextSearchPage
       })
-      // this.props.actions.searchAllMovie(queryText, nextSearchPage);
+      this.props.actions.searchAllMovie(queryText, nextSearchPage);
     }
 
     // console.log(this.props.currentPage, "current page");
@@ -123,22 +133,22 @@ class Home extends React.Component {
       this.setState({
         searchPage: nextCatPage
       })
-      // this.navItemClick(this.props.querySortPage, nextCatPage);
+      this.navItemClick(this.props.querySortPage, nextCatPage);
     }
   }
   prevPage = () => {
-    // const prevPage = this.props.currentPage - 1;
-    // if(this.state.movieList){
-    //   // this.apiCall(prevPage);
-    // }
+    const prevPage = this.props.currentPage - 1;
+    if(this.state.movieList){
+      this.apiCall(prevPage);
+    }
 
-    // let queryText = this.state.searchAllText ? this.state.searchAllText : this.props.queryParam;
+    let queryText = this.state.searchAllText ? this.state.searchAllText : this.props.queryParam;
     if(this.props.queryParam){
       const prevSearchPage = this.state.searchPage - 1;
       this.setState({
         searchPage: prevSearchPage
       })
-      // this.props.actions.searchAllMovie(queryText, prevSearchPage);
+      this.props.actions.searchAllMovie(queryText, prevSearchPage);
     }
 
 
@@ -148,7 +158,7 @@ class Home extends React.Component {
       this.setState({
         searchPage: prevCatPage
       })
-      // this.navItemClick(this.props.querySortPage, prevCatPage);
+      this.navItemClick(this.props.querySortPage, prevCatPage);
     }
   }
 
@@ -218,12 +228,27 @@ class Home extends React.Component {
       borderRadius: 8,
       boxSizing: 'border-box'
     }
-    // const newPath = nextProps.location.pathname.split('/');
+    const dataLoadng = {
+      width: 'inherit',
+      padding:20,
+      background: '#fff',
+      marginRight: 'auto',
+      marginLeft: 'auto',
+      borderRadius: 8,
+      boxSizing: 'border-box',
+      position: 'relative',
+      top:-2,
+      height: '100%',
+      minHeight: '100vh',
+      zIndex: 2
+    }
+    const pagePath = this.props.location.pathname.split('/');
     
     return (
         <div className="App">
             <div className="header">
-              <div className="logo" onClick={() => this.apiCall(1)}><NavLink activeClassName="active" to='/'><img src="https://www.onlinelogomaker.com/applet_userdata/0/prdownload/onlinelogomaker-102417-2222-4606.png?7633"  alt="Homepage"/></NavLink></div>
+              <div className="logo"><NavLink activeClassName="active" to='/'><img src="https://www.onlinelogomaker.com/applet_userdata/0/prdownload/onlinelogomaker-102417-2222-4606.png?7633"  alt="Homepage"/></NavLink></div>
+
               <div className="searchWrapper">
 
                 <div className="search-box">
@@ -238,7 +263,7 @@ class Home extends React.Component {
                 </div>
               </div>
             
-              <Navbar navItem={this.navItemClick}/>
+              <Navbar navItem={this.navItemClick}  pagePath={pagePath}/>
             </div>
 
             <div className="pagination">
@@ -268,17 +293,27 @@ class Home extends React.Component {
 
 
             <div className="App-intro">
+            {this.props.fetching && <div style={dataLoadng}> 
+        <div className="load-wrapp">
+            <div className="loader">
+                <div className="line"></div>
+                <div className="line"></div>
+                <div className="line"></div>
+            </div>
+        </div> </div>}
 
             {this.props.queryParam && <h3 className="searchTitle">Search result for "{this.props.queryParam}"</h3>}
 
-            {this.props.notFound ? <h2 style={notFoundStyle}>Sorry, No match found</h2> : this.state.movieList && !this.state.totalSearch && !this.state.navSelect && this.state.data &&  <Movielist defaultPage={this.props.currentPage} preloader={this.props.preloader} movies={this.props.movies} /> }
+            {this.props.notFound ? <h2 style={notFoundStyle}>Sorry, No match found</h2> : this.state.movieList && !this.state.totalSearch && !this.state.navSelect && this.state.data &&  <Movielist fetching={this.props.fetching} defaultPage={this.props.currentPage} preloader={this.props.preloader} movies={this.props.movies} /> }
 
-            {this.state.totalSearch && !this.state.navSelect && this.state.data &&  <Movielist defaultPage={this.props.currentPage} movies={this.props.searchMovies} />}
+            {this.state.totalSearch && !this.state.navSelect && this.state.data &&  <Movielist fetching={this.props.fetching} defaultPage={this.props.currentPage} movies={this.props.searchMovies} />}
 
-            {this.state.navSelect && this.state.data && <Movielist defaultPage={this.props.currentPage} movies={this.props.movies} />}
+            {this.state.navSelect && this.state.data && <Movielist fetching={this.props.fetching} defaultPage={this.props.currentPage} movies={this.props.movies} />}
 
 
           </div>
+
+          <Footer/>
         </div>
     );
   }
@@ -310,7 +345,7 @@ const mapStateAsProps = (state, ownProps) => {
     searchMovies: state.movies.searchMovies,
     searchMoviesPages: state.movies.searchMoviesPages,
     notFound: state.movies.notFound,
-    preloader: state.movies.preloader
+    fetching: state.movies.fetching
   }
 }
 

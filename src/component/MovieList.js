@@ -9,12 +9,14 @@ class Movielist extends React.Component {
 
   render() {
     
-
-     var movieNodes = this.props.movies.map((movie,i) => {
-        return (
-            <Movie name={movie.original_title} showId={movie.id} key={i} year={movie.release_year} cast={movie.show_cast} summary={movie.overview} category={movie.genres} rating={movie.rating} director={movie.director} poster={movie.poster_path}   >  </Movie>
-        )
-    })
+    let movieNodes = [];
+    if(!this.props.fetching){
+      movieNodes = this.props.movies.map((movie,i) => {
+          return (
+              <Movie name={movie.original_title} showId={movie.id} key={i} year={movie.release_year} cast={movie.show_cast} summary={movie.overview} category={movie.genres} rating={movie.rating} director={movie.director} poster={movie.poster_path}   >  </Movie>
+          )
+      })
+    }
    
     return (
       <div className="App">
