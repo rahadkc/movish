@@ -30,7 +30,7 @@ export default function reducer(state ={
             if(action.payload.length === 0){
                 return {...state, notFound: true}
             }
-            return {...state, preloader: true, searchMovies:action.payload.results, searchMoviesPages:action.payload.total_pages, notFound: false}
+            return {...state, fetching: false,  searchMovies:action.payload.results, searchMoviesPages:action.payload.total_pages, notFound: false}
         }
     }
 
