@@ -45,10 +45,9 @@ class Movie extends React.Component {
             {detail && <div className="layer"></div>}
             <div className="wrapper">
               <div className="content">
-                <div className={detail ? "poster" : "poster-sm"}><Link to={`/movie/${this.props.showId}`}><img src={url + imgUrl} alt="Movie poster"/></Link></div>
+                <div className={detail ? "poster" : "poster-sm"}><Link to={`/movish/movie/${this.props.showId}`}><img src={url + imgUrl} alt="Movie poster"/></Link></div>
                 <div className="text">
-                  {detail && <h5>Movie</h5>}
-                  {!detail && <h3 className="title"><Link to={`/movie/${this.props.showId}`}><i>{this.props.name}</i></Link></h3>}
+                  {!detail && <h3 className="title"><Link to={`/movish/movie/${this.props.showId}`}><i>{this.props.name}</i></Link></h3>}
                   {detail && <h3 className="title">Name: <i>{this.props.name}</i></h3>}
                   {detail &&  <div className="m_d">Category: <span>{categories}</span></div>}
                   {detail && <div className="m_d">Release: <span>{this.props.year}</span></div>}

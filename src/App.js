@@ -15,13 +15,13 @@ class App extends React.Component {
     return (
       <Router>
         <Switch>
-          <Route exact path='/' component={Home} />
-          <Route path='/sortby/:page' component={Home} />
-          <Route path='/sortby/:page/page/:num' component={Home} />
-          <Route path='/page/:num' component={Home} />
-          <Route path='/movie/:id' component={Single} />
-          <Route path='/search/query/:text' component={Home} />
-          <Route path='/search/query/:text/:num' component={Home} />
+          <Route exact path='/movish/' component={Home} />
+          <Route path='/movish/sortby/:page' component={Home} />
+          <Route path='/movish/sortby/:page/page/:num' component={Home} />
+          <Route path='/movish/page/:num' component={Home} />
+          <Route path='/movish/movie/:id' component={Single} />
+          <Route path='/movish/search/query/:text' component={Home} />
+          <Route path='/movish/search/query/:text/:num' component={Home} />
           <Route component={NoMatch} />
         </Switch>
       </Router>

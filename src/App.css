@@ -116,6 +116,13 @@ h5{
 }
 .single-item .content{
   display:flex;
+  color:rgba(255, 255, 255, 0.8);
+  background:rgba(3, 3, 3, 0.8);
+}
+.single-item  .title{
+  font-size:28px;
+  line-height:30px;
+  color:cadetblue;
 }
 .poster{
   flex:3;
@@ -140,6 +147,7 @@ h5{
   height:170px;
 }
 .single-item .text{
+  padding-top:35px;
   height:auto;
   flex:3;
 }
@@ -181,6 +189,9 @@ h5{
 .cast  span{
   font-size:14px;
   font-weight:normal;
+}
+.m_d a{
+  color:cadetblue;
 }
 button{
   position:relative;
