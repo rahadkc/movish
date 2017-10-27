@@ -38,6 +38,20 @@ class Single extends React.Component {
       borderRadius: 8,
       boxSizing: 'border-box'
     }
+    const dataLoadng = {
+      width: 'inherit',
+      padding:20,
+      background: '#fff',
+      marginRight: 'auto',
+      marginLeft: 'auto',
+      borderRadius: 8,
+      boxSizing: 'border-box',
+      position: 'relative',
+      top:-2,
+      height: '100%',
+      minHeight: '100vh',
+      zIndex: 2
+    }
     const movie = this.props.movies;
     const isMovie = Object.keys(movie).length === 0;
     console.log(isMovie, " movie")
@@ -51,7 +65,14 @@ class Single extends React.Component {
             <br/>
             {!isMovie && this.state.data && !this.props.fetching && <Movie detail={this.state.detail} movie={movie} name={movie.original_title} showId={movie.id} key={movie.showId} year={movie.release_date} cast={movie.show_cast} summary={movie.overview} category={movie.genres} rating={movie.vote_average} director={movie.director} poster={movie.poster_path}   /> }
 
-            {!this.props.notFound && isMovie && <h2 style={notFoundStyle}>Loading .....</h2>  }
+            {this.props.fetching && <div style={dataLoadng}> 
+        <div className="load-wrapp">
+            <div className="loader">
+                <div className="line"></div>
+                <div className="line"></div>
+                <div className="line"></div>
+            </div>
+        </div> </div>}
             
             {this.props.notFound && <h2 style={notFoundStyle}>Sorry, No match found</h2>}
 
