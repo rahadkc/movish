@@ -25,7 +25,7 @@ class Home extends React.Component {
   componentWillMount(){
     const path = this.props.location.pathname.split('/');
     this.setState({
-      searchPage: isNaN(path[5]) ? 1 : parseInt(path[5],10)
+      searchPage: isNaN(path[4]) ? 1 : parseInt(path[4],10)
     })
   }
 
@@ -40,7 +40,7 @@ class Home extends React.Component {
       this.setState({
         totalSearch: true,
         movieList: false,
-        searchPage: isNaN(path[5]) ? 1 : parseInt(path[5],10)
+        searchPage: isNaN(path[4]) ? 1 : parseInt(path[4],10)
       })
       this.props.actions.searchAllMovie(this.props.queryParam, this.state.searchPage)
     }
@@ -52,10 +52,10 @@ class Home extends React.Component {
         totalSearch: false,
         movieList: false,
         navSelect:true,
-        searchPage: isNaN(path[5]) ? 1 : parseInt(path[5],10)
+        searchPage: isNaN(path[4]) ? 1 : parseInt(path[4],10)
       })
       const category = this.props.querySortPage;
-      // const page = path ? parseInt(path[5],10) : 1;
+      // const page = path ? parseInt(path[4],10) : 1;
       console.log(this.state.searchPage, " state.searchPage")
       this.navItemClick(category, this.props.newCatPage)
     }
@@ -63,7 +63,7 @@ class Home extends React.Component {
   }
   componentWillReceiveProps(nextProps) {
     // let path = this.props.location.pathname.split('/');
-    // path = isNaN(path[5]) ? 1 : parseInt(path[5],10);
+    // path = isNaN(path[4]) ? 1 : parseInt(path[4],10);
     
     
     this.setState({
@@ -197,7 +197,7 @@ class Home extends React.Component {
     let queryText = this.state.searchAllText ? this.state.searchAllText : this.props.queryParam;
 
     this.props.actions.searchAllMovie(queryText, 1);
-    this.props.history.push(`/movish/search/query/${queryText}/1`);
+    this.props.history.push(`/search/query/${queryText}/1`);
   }
 
   navItemClick = (category,pageNum) => {
@@ -247,7 +247,7 @@ class Home extends React.Component {
     return (
         <div className="App">
             <div className="header">
-              <div className="logo"><NavLink activeClassName="active" to='/movish/'><img src="https://www.onlinelogomaker.com/applet_userdata/0/prdownload/onlinelogomaker-102417-2222-4606.png?7633"  alt="Homepage"/></NavLink></div>
+              <div className="logo"><NavLink activeClassName="active" to='/'><img src="https://www.onlinelogomaker.com/applet_userdata/0/prdownload/onlinelogomaker-102417-2222-4606.png?7633"  alt="Homepage"/></NavLink></div>
 
               <div className="searchWrapper">
 
@@ -268,13 +268,13 @@ class Home extends React.Component {
 
             <div className="pagination">
               {/*query prev nav*/}
-              {this.state.totalSearch && !this.state.navSelect && <div  className={this.props.newCatPage === 1 ? "disabled" : ""}  onClick={() => this.prevPage()} ><Link to={`/movish/search/query/${this.props.queryParam}/${this.state.searchPage-1}`}>Prev</Link></div>}
+              {this.state.totalSearch && !this.state.navSelect && <div  className={this.props.newCatPage === 1 ? "disabled" : ""}  onClick={() => this.prevPage()} ><Link to={`/search/query/${this.props.queryParam}/${this.state.searchPage-1}`}>Prev</Link></div>}
 
               {/*default prev nav*/}
-              {!this.state.totalSearch && !this.state.navSelect &&  <div className={this.props.currentPage === 1 ? "disabled" : ""} onClick={() => this.prevPage()}><Link to={`/movish/page/${this.props.currentPage - 1}`}>prev</Link></div>}
+              {!this.state.totalSearch && !this.state.navSelect &&  <div className={this.props.currentPage === 1 ? "disabled" : ""} onClick={() => this.prevPage()}><Link to={`/page/${this.props.currentPage - 1}`}>prev</Link></div>}
 
               {/*category prev nav*/}
-              {!this.state.totalSearch && this.state.navSelect && <div className={this.props.newCatPage === 1 ? "disabled" : ""} onClick={() => this.prevPage()}><Link to={`/movish/sortby/${this.props.querySortPage}/page/${this.props.newCatPage - 1}`}>prev</Link></div>}
+              {!this.state.totalSearch && this.state.navSelect && <div className={this.props.newCatPage === 1 ? "disabled" : ""} onClick={() => this.prevPage()}><Link to={`/sortby/${this.props.querySortPage}/page/${this.props.newCatPage - 1}`}>prev</Link></div>}
 
               {/*page number*/}
               {this.state.movieList && <div className="num movie list">{this.props.currentPage ? this.props.currentPage : this.state.defaultPage } </div>}
@@ -282,13 +282,13 @@ class Home extends React.Component {
               {this.state.navSelect && <div className="num nav select">{ this.props.newCatPage }</div>}
 
               {/*default next nav*/}
-              {!this.state.totalSearch && !this.state.navSelect &&  <div onClick={() => this.nextPage()}><Link to={`/movish/page/${this.props.currentPage + 1}`}>Next</Link></div>}
+              {!this.state.totalSearch && !this.state.navSelect &&  <div onClick={() => this.nextPage()}><Link to={`/page/${this.props.currentPage + 1}`}>Next</Link></div>}
 
               {/*category next nav*/}
-              {!this.state.totalSearch && this.state.navSelect &&  <div onClick={() => this.nextPage()}><Link to={`/movish/sortby/${this.props.querySortPage}/page/${this.props.newCatPage + 1}`}>Next</Link></div>}
+              {!this.state.totalSearch && this.state.navSelect &&  <div onClick={() => this.nextPage()}><Link to={`/sortby/${this.props.querySortPage}/page/${this.props.newCatPage + 1}`}>Next</Link></div>}
 
               {/*query next nav*/}
-              {this.state.totalSearch && !this.state.navSelect &&  <div  className={this.props.searchMoviesPages === this.props.newCatPage ? "disabled" : ""}  onClick={() => this.nextPage()} ><Link to={`/movish/search/query/${this.props.queryParam}/${this.props.newCatPage+1}`}>Next</Link></div>}
+              {this.state.totalSearch && !this.state.navSelect &&  <div  className={this.props.searchMoviesPages === this.props.newCatPage ? "disabled" : ""}  onClick={() => this.nextPage()} ><Link to={`/search/query/${this.props.queryParam}/${this.props.newCatPage+1}`}>Next</Link></div>}
             </div>
 
 
@@ -322,7 +322,7 @@ class Home extends React.Component {
 const mapStateAsProps = (state, ownProps) => {
   const path = ownProps.location.pathname.split('/');
   const newPage = parseInt(ownProps.match.params.num,10);
-  const catPage = parseInt(path[5]);
+  const catPage = parseInt(path[4]);
   const queryParam = ownProps.match.params.text;
   const querySortPage = ownProps.match.params.page;
   let currentPage = null;

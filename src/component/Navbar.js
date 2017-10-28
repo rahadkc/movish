@@ -30,7 +30,7 @@ class Navbar extends React.Component {
             <ul className="nav-list">
                
                 {navItem.map((item, i) => {
-                    return <li key={i} onClick={()=> this.navItemClick(item)}><NavLink to={`/movish/sortby/${item}`}>{item.split('-').join(' ')}</NavLink></li>
+                    return <li key={i} onClick={()=> this.navItemClick(item)}><NavLink to={`/sortby/${item}`}>{item.split('-').join(' ')}</NavLink></li>
                      {/* return <li key={i} onClick={()=> this.navItemClick(item)} className={activeCategory === item && "active disabled"}>{item.split('-').join(' ')}</li> */}
                 })}
             </ul>
