@@ -173,7 +173,8 @@ class Home extends React.Component {
     
     //if input value empty 
     if(event.target.value === ''){
-      this.props.actions.fetchMovies(this.props.currentPage);
+      // this.props.actions.fetchMovies(this.props.currentPage);
+      this.props.history.go()
     }else{
       this.props.actions.searchMovies(updatedList);
     }
