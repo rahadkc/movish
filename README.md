@@ -6,7 +6,7 @@ Movie app using React, Redux, React RouterV4, ThemovieDB API
 
 ### Demo
 This project Demo [Demo](https://rahadkc.github.io/movish/)
-#Note:
+## Note:
 For demo -- If you reload Router link content will be diappear since server isn't running in github.Thanks 
 
 ### Version
