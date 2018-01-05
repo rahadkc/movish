@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {HashRouter, BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Single from './component/Single';
 import NoMatch from './component/NoMatch';
 import Home from './Home';
@@ -15,6 +15,7 @@ class App extends React.Component {
     return (
       <Router>
         <Switch>
+          
           <Route exact path='/' component={Home} />
           <Route path='/sortby/:page' component={Home} />
           <Route path='/sortby/:page/page/:num' component={Home} />

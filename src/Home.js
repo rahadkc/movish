@@ -7,6 +7,7 @@ import Navbar from './component/Navbar';
 import Footer from './component/Footer';
 import * as actions from "./actions/MovieAction";
 import './App.css';
+import logo from'./logo.png';
 
 class Home extends React.Component {
 
@@ -248,7 +249,7 @@ class Home extends React.Component {
     return (
         <div className="App">
             <div className="header">
-              <div className="logo"><NavLink activeClassName="active" to='/'><img src="https://www.onlinelogomaker.com/applet_userdata/0/prdownload/onlinelogomaker-102417-2222-4606.png?7633"  alt="Homepage"/></NavLink></div>
+              <div className="logo"><NavLink activeClassName="active" to='/'><img src={logo}  alt="Homepage"/></NavLink></div>
 
               <div className="searchWrapper">
 
@@ -260,6 +261,7 @@ class Home extends React.Component {
                 <div className="search-box">
                     <form onSubmit={this.searchAllMovie}>
                       <input type="search" className="search" placeholder="Search from website" onChange={this.filterApi}/>
+                      <span className="icon">&#128269;</span>
                     </form>
                 </div>
               </div>
