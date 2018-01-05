@@ -15,7 +15,7 @@ class App extends React.Component {
     return (
       <Router>
         <Switch>
-          
+        
           <Route exact path='/' component={Home} />
           <Route path='/sortby/:page' component={Home} />
           <Route path='/sortby/:page/page/:num' component={Home} />
