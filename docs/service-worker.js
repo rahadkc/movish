@@ -21,11 +21,12 @@ const RUNTIME = 'runtime';
 const PRECACHE_URLS = [
   'index.html',
   './', // Alias for index.html
-  'style.css',
-  'bundle.js',
-  'demo.js',
   'logo.png',
-  'manifest.json'
+  '/movish/style.css',
+  '/movish/service-worker.js',
+  '/movish/bundle.js',
+  '/movish/demo.js',
+  'manifest.json',
 ];
 
 // The install handler takes care of precaching the resources we always need.
