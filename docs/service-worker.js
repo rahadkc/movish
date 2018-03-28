@@ -25,7 +25,7 @@ const PRECACHE_URLS = [
   'bundle.js',
   'demo.js',
   'logo.png',
-  'manifestjson'
+  'manifest.json'
 ];
 
 // The install handler takes care of precaching the resources we always need.
