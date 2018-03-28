@@ -2,7 +2,7 @@
   "name": "Movish - Movie search React app",
   "short_name": "Movish",
   "theme_color": "#5f9ea0",
-  "background_color": "#929faa",
+  "background_color": "#ffffff",
   "display": "standalone",
   "start_url": "./index.html",
   "icons": [
