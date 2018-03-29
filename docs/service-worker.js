@@ -22,10 +22,10 @@ const PRECACHE_URLS = [
   'index.html',
   './', // Alias for index.html
   'logo.png',
-  '/movish/style.css',
-  '/movish/service-worker.js',
-  '/movish/bundle.js',
-  '/movish/demo.js',
+  'style.css',
+  'service-worker.js',
+  'bundle.js',
+  'demo.js',
   'manifest.json',
 ];
 
